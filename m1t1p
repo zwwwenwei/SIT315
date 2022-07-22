@@ -1,0 +1,25 @@
+const int temp = 2;
+const int LED = 2;
+void setup()
+{
+  
+  Serial.begin(9600);
+  pinMode(LED, OUTPUT);
+}
+
+void loop()
+{
+  double temp = analogRead(2);
+  temp = temp*0.48366013-49;
+  Serial.print("Temperature:");
+  Serial.print(temp);
+  Serial.println();
+  delay(1000);
+  
+  if(temp > 50){
+    digitalWrite(LED, HIGH);
+  }
+  else{
+    digitalWrite(LED, LOW);
+  }
+}
