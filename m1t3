@@ -1,0 +1,46 @@
+const int b = 3;
+const int LED = 13;
+const int LED2 = 8;
+const int pir = 2;
+
+volatile int LEDstate = 0;
+volatile int LEDstate2 = 0;
+
+void setup()
+{
+  Serial.begin(9600);
+  pinMode(b, INPUT);
+  pinMode(LED, OUTPUT);
+  pinMode(pir, INPUT);
+  pinMode(LED2, OUTPUT);
+  attachInterrupt(digitalPinToInterrupt(b), button, CHANGE);
+  attachInterrupt(digitalPinToInterrupt(pir), pirsensor, CHANGE);
+}
+
+void loop()
+{
+  
+}
+
+void pirsensor()
+{
+  if (LEDstate2 == 1)
+  {
+    LEDstate2 = 0;
+    Serial.println("PIR Not Work");
+    digitalWrite(LED2, LOW);
+}
+  else
+  {
+    LEDstate2 = 1;
+    Serial.println("PIR Work");
+    digitalWrite(LED2, HIGH);
+  }
+  
+}
+
+void button()
+{
+  LEDstate = digitalRead(b);
+  digitalWrite(LED, LEDstate);
+}
